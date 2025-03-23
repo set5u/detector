@@ -21,10 +21,10 @@
   import { onMounted, onUnmounted, ref } from "vue";
 
   const devices = ref<MediaDeviceInfo[]>();
-const deviceInput = ref();
-  const videoElement = ref<HTMLVideoElement>()
+  const deviceInput = ref();
+  const videoElement = ref<HTMLVideoElement>();
   const worker = new Worker(
-    new URL("~/workers/poseWorker.ts", import.meta.url)
+    new URL("~/workers/poseWorker.worker.ts", import.meta.url)
   );
   let stream: MediaStream | null = null;
   onMounted(async () => {
@@ -58,7 +58,7 @@ const deviceInput = ref();
           break;
         case "pose":
           // renderPose(e.data.result);
-          console.log(e.data.result)
+          console.log(e.data.result);
           processingPose = false;
           break;
         case "hand":
@@ -79,9 +79,8 @@ const deviceInput = ref();
     };
     render();
   }
-onUnmounted(() => {
-
-  running.value = false;
-  stream?.getTracks()?.forEach((v) => v.stop());
-});
+  onUnmounted(() => {
+    running.value = false;
+    stream?.getTracks()?.forEach((v) => v.stop());
+  });
 </script>
