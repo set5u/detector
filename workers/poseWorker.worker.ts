@@ -8,29 +8,29 @@ import {
 } from "@tensorflow-models/pose-detection";
 (async () => {
   await tf.setBackend("webgl");
-  const model = SupportedModels.BlazePose;
+  const model = SupportedModels.MoveNet;
   const detectorConfig = {
     runtime: "tfjs",
     enableSmoothing: true,
     // enableSegmentation: true,
-    modelType: "full",
+    modelType: "MultiPose.Lightning",
   };
   const detector = await createDetector(model, detectorConfig);
-  const handWorkers: Worker[] = [];
-  const handWorkersProcessing: boolean[] = [];
-  const oCanvas = new OffscreenCanvas(224, 224);
+  //   const handWorkers: Worker[] = [];
+  //   const handWorkersProcessing: boolean[] = [];
+  //   const oCanvas = new OffscreenCanvas(224, 224);
   addEventListener("message", async (e) => {
     const image = e.data as ImageBitmap;
     const result = await detector.estimatePoses(image, {}, performance.now());
     let j = 0;
     for (const r of result) {
       const i = j;
-      const tensor = r.segmentation!.mask;
-      // @ts-ignore
-      r.segmentationImage = await r.segmentation!.mask.toImageData();
-      // @ts-ignore
-      tensor.mask.dispose();
-      delete r.segmentation;
+      //   const tensor = r.segmentation!.mask;
+      //   // @ts-ignore
+      //   r.segmentationImage = await r.segmentation!.mask.toImageData();
+      //   // @ts-ignore
+      //   tensor.mask.dispose();
+      //   delete r.segmentation;
       //   if (!handWorkers[i * 2]) {
       //     const right = (handWorkers[i * 2] = new Worker(
       //       new URL("~/workers/handWorker.worker.ts", import.meta.url)
