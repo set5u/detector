@@ -9,11 +9,11 @@ import {
 (async () => {
   await tf.setBackend("webgl");
 
-  const model = SupportedModels.MoveNet;
+  const model = SupportedModels.BlazePose;
   const detectorConfig = {
     runtime: "tfjs",
     enableSmoothing: true,
-    modelType: "SinglePose.Thunder",
+    modelType: "full",
   };
   const detector = await createDetector(model, detectorConfig);
   addEventListener("message", async (e) => {
