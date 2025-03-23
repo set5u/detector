@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   builder: "rspack",
   app: {
     cdnURL: "/detector/",
+    baseURL: "/detector/",
   },
   imports: { autoImport: false },
 });
