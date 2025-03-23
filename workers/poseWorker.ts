@@ -13,7 +13,7 @@ import {
   const detectorConfig = {
     runtime: "tfjs",
     enableSmoothing: true,
-    modelType: "MultiPose.Lightning",
+    modelType: "SinglePose.Thunder",
   };
   const detector = await createDetector(model, detectorConfig);
   addEventListener("message", async (e) => {

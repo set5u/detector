@@ -23,9 +23,6 @@
   const devices = ref<MediaDeviceInfo[]>();
   const deviceInput = ref();
   const videoElement = ref<HTMLVideoElement>();
-  const worker = new Worker(
-    new URL("~/workers/poseWorker.ts", import.meta.url)
-  );
   let stream: MediaStream | null = null;
   onMounted(async () => {
     stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -51,6 +48,9 @@
     });
     videoElement.value.play();
     let initializedWorker = false;
+    const worker = new Worker(
+      new URL("~/workers/poseWorker.ts", import.meta.url)
+    );
     worker.onmessage = (e) => {
       switch (e.data.type) {
         case "init":
