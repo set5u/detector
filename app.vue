@@ -24,7 +24,7 @@
   const deviceInput = ref();
   const videoElement = ref<HTMLVideoElement>();
   const worker = new Worker(
-    new URL("~/workers/poseWorker.worker.ts", import.meta.url)
+    new URL("~/workers/poseWorker.ts", import.meta.url)
   );
   let stream: MediaStream | null = null;
   onMounted(async () => {
